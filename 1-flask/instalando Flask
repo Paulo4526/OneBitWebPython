@@ -1,0 +1,6 @@
+Criar um ambiente virtual de desenvolvimento para o flask com o comando 'python -m venv .venv'
+Habilitando para o projeto o ambiente virtual de desenvolvimento, no terminal acesse a pasta .venv, depois Scripts e depois activate
+OBS: Comando ilustrativo para habilitar o ambiente virtual: .\.venv\Scripts\activate. Note que ao executa o comando o diretório .venv será ativado no terminal
+Após isso instalar o flask com o passo abaixo.
+Para instalar o flask basta no terminal digitar o comando 'pip install Flask'
+No pycharm, na opção file vá em settings, selecione o nome do projeto e o interpreter e add interpreter, em location coloque o diretório até a pasta .\venv do projeto em questão crie o novo ambiente e após isso iniciaremos o projeto.

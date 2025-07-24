@@ -1,0 +1,4 @@
+1 - Criar o arquivo .env
+2 - Criar a Pasta core para configurações
+3 - Criar a Pasta Model para inserção dos modelos ou entidades
+4 - Criar a Pasta API para inserção do Router e os Handlers

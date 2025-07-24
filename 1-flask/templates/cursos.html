@@ -1,0 +1,52 @@
+{% extends 'html_base.html' %}
+{% block conteudo %}
+  <h1>Bibliotecas</h1>
+  <hr/>
+  <form action="" method="post">
+      <div style="display:flex; gap:10px; flex-direction: column;">
+          <div>
+              <label for="curso">Conteúdo</label><br>
+              <input name="curso" id="curso" type="text" autofocus required/>
+          </div>
+
+          <div>
+              <label for="nota">Nota</label><br>
+              <input name="nota" id="nota" type="number" step="0.01" required/>
+          </div>
+
+          <div>
+              <label for="professor">Professor</label><br>
+              <input name="professor" id="professor" type="text" required/>
+          </div>
+
+          <button style="width:100px">Adicionar</button>
+      </div>
+  </form>
+  <hr>
+  <ol>
+    <!--    Utilizando o for com jinja2 nativo do flask para iterar os valores da lista-->
+    {% for curso in cursos[0:] %}
+      <!--      Iniciando a verificação com if-->
+      {% if curso["curso"] == "Integração de API" %}
+          <li>
+              <p style="margin: 0px">{{ curso["curso"] }} : <span style="color: green">Conteúdo verificado!</span></p>
+              <details>
+                  <summary>Ver detalhes</summary>
+                  <p style="margin: 10px 0px 0px 0px">{{ curso["professor"] }}</p>
+                  <p style="margin: 0px 0px 10px 0px">{{ curso["nota"] }}</p>
+              </details>
+          </li>
+
+      {% else %}
+          <li>
+              <p style="margin: 0px">{{ curso["curso"] }}</p>
+              <details>
+                  <summary>Ver detalhes</summary>
+                  <p style="margin: 10px 0px 0px 0px">{{ curso["professor"] }}</p>
+                  <p style="margin: 0px 0px 10px 0px">{{ curso["nota"] }}</p>
+              </details>
+          </li>
+      {% endif %}
+    {% endfor %}
+  </ol>
+{% endblock %}
