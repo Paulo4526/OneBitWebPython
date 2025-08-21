@@ -47,7 +47,7 @@ class User(Document):
     # (poderia ser booleano, mas aqui está como string — ex: "true" ou "false")
     disabled: Optional[str] = None
 
-    # Método especial que define como o objeto é representado no modo debug
+    # Metodo especial que define como o objeto é representado no modo debug
     # Exemplo: ao usar repr(user), mostrará algo como 'User email@example.com'
     def __repr__(self) -> str:
         return f'User {self.email}'
