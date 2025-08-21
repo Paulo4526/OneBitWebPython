@@ -3,9 +3,10 @@ from fastapi import FastAPI
 
 # Importa o decorador para criar gerenciadores assíncronos de contexto (útil para startup/shutdown do app)
 from contextlib import asynccontextmanager
+import logging
 
 # Importa as configurações da aplicação (ex: conexão com MongoDB, nome do projeto, prefixos de rota)
-from core.config import settings
+from app.core.config import settings
 
 # Importa a função que inicializa o Beanie com os modelos e o banco MongoDB
 from beanie import init_beanie
@@ -14,8 +15,8 @@ from beanie import init_beanie
 from motor.motor_asyncio import AsyncIOMotorClient
 
 # Importa o modelo de documento User, que será armazenado no MongoDB via Beanie
-from model.user_model import User
-from api.api_v1 import router
+from app.model.user_model import User
+from app.api.api_v1.router import router
 
 
 # Define o gerenciador de ciclo de vida da aplicação (executado ao iniciar e encerrar a API)
@@ -24,14 +25,17 @@ async def lifespan(app: FastAPI):
     # Cria uma conexão com o banco MongoDB usando a string de conexão configurada, e acessa o banco 'todoapp'
     cliente_db = AsyncIOMotorClient(settings.MONGO_CONNECTION_STRING).todoapp
 
-    # Inicializa o Beanie com a conexão e a lista de modelos que representam os documentos do MongoDB
-    await init_beanie(
-        database=cliente_db,
-        document_models=[
-            # Lista de modelos (documentos) a serem registrados no banco
-            User
-        ]
-    )
+    try:
+        # Inicializa o Beanie com a conexão e a lista de modelos que representam os documentos do MongoDB
+        await init_beanie(
+            database=cliente_db,
+            document_models=[
+                # Lista de modelos (documentos) a serem registrados no banco
+                User
+            ]
+        )
+    except Exception as exc:
+        logging.exception("Falha ao inicializar o Beanie/MongoDB. Continuando sem DB.")
 
     # Mantém a aplicação rodando durante o ciclo de vida
     yield

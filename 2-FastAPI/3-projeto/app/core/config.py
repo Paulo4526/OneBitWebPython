@@ -19,19 +19,19 @@ class Settings(BaseSettings):
     API_V1_STR: str = '/api/v1'
 
     # Chave secreta usada para gerar o token de acesso JWT, vinda do .env
-    JWT_SECRET_KEY: str = config('JWT_SECRET_KEY', cast=str)
+    JWT_SECRET_KEY: str = config('JWT_SECRET_KEY', cast=str, default='changeme')
 
     # Chave secreta usada para gerar o token de refresh JWT, também lida do .env
-    JWT_REFRESH_SECRET_KET: str = config('JWT_REFRESH_SECRET_KET', cast=str)
+    JWT_REFRESH_SECRET_KEY: str = config('JWT_REFRESH_SECRET_KEY', cast=str, default='changeme')
 
     # Algoritmo usado para assinar os tokens JWT (padrão: HS256)
     ALGORITHM: str = 'HS256'
 
     # Tempo de expiração do token de acesso (em minutos) — aqui: 60 minutos
-    ACESS_TOKEN_EXPIRE_MINUTES: int = 60
+    ACCESS_TOKEN_EXPIRE_MINUTES: int = 60
 
     # Tempo de expiração do token de refresh — aqui: 7 dias (60 min × 24 h × 7)
-    REFESH_TOKEN_EXPIRE_MINUTES: int = 60 * 24 * 7
+    REFRESH_TOKEN_EXPIRE_MINUTES: int = 60 * 24 * 7
 
     # Lista de URLs permitidas para fazer requisições à API (CORS); inicialmente vazia
     BACKEND_CORS_ORIGINS: List[AnyHttpUrl] = []
@@ -40,7 +40,7 @@ class Settings(BaseSettings):
     PROJECT_NAME: str = "TODOFast"
 
     # String de conexão com o MongoDB, também lida do .env
-    MONGO_CONNECTION_STRING: str = config("MONGO_CONNECTION_STRING", cast=str)
+    MONGO_CONNECTION_STRING: str = config("MONGO_CONNECTION_STRING", cast=str, default='mongodb://localhost:27017')
 
     # Subclasse interna para configurar o comportamento da classe Settings
     class Config:

@@ -24,7 +24,7 @@ from typing import Optional
 class User(Document):
 
     # Campo obrigatório: identificador único gerado automaticamente com uuid4
-    user_id: UUID = Field(default=uuid4)
+    user_id: UUID = Field(default_factory=uuid4)
 
     # Campo de nome de usuário do tipo string
     # Indexed cria um índice no banco para esse campo, e unique=True garante que não pode haver duplicados
@@ -51,3 +51,19 @@ class User(Document):
     # Exemplo: ao usar repr(user), mostrará algo como 'User email@example.com'
     def __repr__(self) -> str:
         return f'User {self.email}'
+
+    def __str__(self) -> str:
+        return self.email
+
+    def __eq__(self, other: object) -> bool:
+        if isinstance(other, User):
+            return self.email == other.email
+        return False
+
+    @property
+    def crearte(self) -> datetime:
+        return self.id.generation_time
+
+    @classmethod
+    async def by_email(self, email: str) -> "User":
+        return await self.find_one(self.email == email)
