@@ -1,3 +1,6 @@
+# Patch para compatibilidade com Python 3.13
+import app.patches
+
 # Importa a classe principal do FastAPI usada para criar a aplicação web
 from fastapi import FastAPI
 
@@ -16,6 +19,7 @@ from motor.motor_asyncio import AsyncIOMotorClient
 
 # Importa o modelo de documento User, que será armazenado no MongoDB via Beanie
 from app.model.user_model import User
+
 from app.api.api_v1.router import router
 
 
