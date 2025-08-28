@@ -1,5 +1,4 @@
 #Lembresse de criar o arquivo .env e colocar as variaveis de ambiente lá no diretório app do python
-# Importa o tipo List da biblioteca typing para tipar listas (usado para CORS)
 from typing import List
 
 # Importa a função config da biblioteca python-decouple para acessar variáveis do .env
@@ -39,8 +38,21 @@ class Settings(BaseSettings):
     # Nome do projeto (usado, por exemplo, no título da documentação Swagger)
     PROJECT_NAME: str = "TODOFast"
 
+    # Valores devem vir exclusivamente de variáveis de ambiente
+    # Parâmetros individuais para montar a conexão com o MongoDB quando a string completa não for fornecida
+    MONGO_USER: str = config("MONGO_USER", cast=str, default="")
+    MONGO_PASSWORD: str = config("MONGO_PASSWORD", cast=str, default="")
+    # Não definir defaults absolutos aqui.
+    MONGO_HOST: str = config("MONGO_HOST", cast=str, default="")
+    MONGO_PORT: int = config("MONGO_PORT", cast=int, default=0)
+    MONGO_AUTH_SOURCE: str = config("MONGO_AUTH_SOURCE", cast=str, default="")
+
     # String de conexão com o MongoDB, também lida do .env
-    MONGO_CONNECTION_STRING: str = config("MONGO_CONNECTION_STRING", cast=str, default='mongodb://localhost:27017')
+    MONGO_CONNECTION_STRING: str = config(
+        "MONGO_CONNECTION_STRING",
+        cast=str,
+        default="",
+    )
 
     # Subclasse interna para configurar o comportamento da classe Settings
     class Config:
@@ -48,5 +60,4 @@ class Settings(BaseSettings):
         case_sensitive = True
 
 
-#Instanciando a classe Settings()
 settings = Settings()

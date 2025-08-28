@@ -1,6 +1,3 @@
-# Patch para compatibilidade com Python 3.13
-import app.patches
-
 # Importa a classe principal do FastAPI usada para criar a aplicação web
 from fastapi import FastAPI
 

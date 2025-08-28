@@ -2,7 +2,7 @@ from fastapi import APIRouter, HTTPException, status
 from app.schemas.user_cad import UserAuth
 from app.schemas.user_show import UserDetail
 from app.services.user_service import UserService
-import pymongo
+from pymongo.errors import DuplicateKeyError
 
 user_router = APIRouter()
 @user_router.get('/test')
@@ -13,5 +13,7 @@ async def test():
 async def adiciona_usuario(data: UserAuth):
     try:
         return await UserService.create_user(data)
-    except Exception as e:
-        raise HTTPException(status_code=status.HTTP_401_UNAUTHORIZED, detail=str(e))
+    except DuplicateKeyError:
+        raise HTTPException(status_code=status.HTTP_409_CONFLICT, detail='Usuário já existe')
+    except Exception as exc:
+        raise HTTPException(status_code=status.HTTP_500_INTERNAL_SERVER_ERROR, detail=str(exc))
