@@ -1,6 +1,7 @@
 from app.model.user_model import User
 from app.schemas.user_cad import UserAuth
-from app.core.secutiry import get_password_hash
+from app.core.secutiry import get_password_hash, verify_password
+from typing import Optional
 
 class UserService:
     @staticmethod
@@ -12,3 +13,22 @@ class UserService:
         )
         await usuario.save()
         return usuario
+
+    @staticmethod
+    async def get_user_by_email(email: str) -> Optional[User]:
+        user = await User.find_one(User.email == email)
+        return user
+
+    @staticmethod
+    async def authenticate(email: str, password: str) -> Optional[User]:
+        user = await UserService.get_user_by_email(email=email)
+        if not user:
+            return None
+
+        if not verify_password(
+            password=password,
+            hashed_password=user.has_password
+        ):
+            return None
+        return user
+

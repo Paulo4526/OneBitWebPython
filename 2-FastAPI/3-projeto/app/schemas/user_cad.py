@@ -1,7 +1,11 @@
 from pydantic import BaseModel, EmailStr, Field
 
 class UserAuth(BaseModel):
-    email: EmailStr = Field(..., description="E-mail do Usuário")
+    email: EmailStr = Field(
+        ...,
+        description="E-mail do Usuário"
+    )
+
     username: str = Field(
         ...,
         min_length=5,
@@ -9,6 +13,7 @@ class UserAuth(BaseModel):
         description="Username",
 
     )
+    
     password: str = Field(
         ...,
         min_length=5,

@@ -1,4 +1,9 @@
 1 - Criar o arquivo .env
 2 - Criar a Pasta core para configurações
 3 - Criar a Pasta Model para inserção dos modelos ou entidades
-4 - Criar a Pasta API para inserção do Router e os Handlers
+4 - Criar a Pasta Schemas para inserção dos DTO's ou modelo de transferencia de dados
+5 - Criar a pasta service para regras de negócio
+6 - Criar a pasta API para criar configuração da rota e os handlers_controles
+7 - Criar o Dockerfile com 2 Stages, a primeira imagem para salvar a aplicação dentro de um diretório, a segunda para pegar essa aplicação e inicializar a aplicação
+8 - Criar o Dockercompose ou Compose em modo swarm.
+9 - Criar o script app.py na raiz da pasta "app"
