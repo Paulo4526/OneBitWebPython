@@ -1,0 +1,29 @@
+[project]
+name = "3-projeto"
+version = "0.1.0"
+description = ""
+authors = [
+    {name = "Paulo4526",email = "paulosilvabueno@hotmail.com"}
+]
+readme = "README.md"
+requires-python = "^3.13"
+dependencies = [
+    "pymongo (>=4.7)",
+    "fastapi (>=0.110)",
+    "uvicorn[standard] (>=0.23)",
+    "beanie (>=1.25.0)",
+    "motor (>=3.3.2)",
+    "pydantic (>=2.5)",
+    "pydantic-settings (>=2.1)",
+    "python-decouple (>=3.8)",
+    "email-validator (>=2.1)",
+    "passlib[bcrypt] (>=1.7.4)",
+    "python-jose[cryptography] (>=3.5.0)",
+    "bcrypt (>=4.3.0)",
+    "cryptography (>=45.0.0)",
+    "python-multipart (>=0.0.6)"
+]
+
+[build-system]
+requires = ["poetry-core>=2.0.0,<3.0.0"]
+build-backend = "poetry.core.masonry.api"
