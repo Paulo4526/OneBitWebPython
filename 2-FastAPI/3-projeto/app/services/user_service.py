@@ -2,6 +2,7 @@ from app.model.user_model import User
 from app.schemas.user_cad import UserAuth
 from app.core.secutiry import get_password_hash, verify_password
 from typing import Optional
+from uuid import UUID
 
 class UserService:
     @staticmethod
@@ -24,11 +25,15 @@ class UserService:
         user = await UserService.get_user_by_email(email=email)
         if not user:
             return None
-
         if not verify_password(
             password=password,
             hashed_password=user.has_password
         ):
             return None
         return user
+
+    @staticmethod
+    async def get_user_by_id(id: UUID) -> Optional[User]:
+        user = await User.find_one(User.user_id == id)
+        return  user
 

@@ -2,6 +2,7 @@ from passlib.context import CryptContext
 from typing import Union, Any
 from datetime import datetime, timedelta
 from jose import jwt
+
 from app.core.config import settings
 
 password_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
