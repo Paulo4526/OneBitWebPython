@@ -1,13 +1,10 @@
 from fastapi import APIRouter, HTTPException, status
-from app.schemas.user_cad import UserAuth
-from app.schemas.user_show import UserDetail
+from app.schemas.users.user_cad import UserAuth
+from app.schemas.users.user_show import UserDetail
 from app.services.user_service import UserService
 from pymongo.errors import DuplicateKeyError
 
 user_router = APIRouter()
-@user_router.get('/test')
-async def test():
-    return f'Testtando o nosso projeto'
 
 @user_router.post('/adiciona', summary='Adiciona Usuário', response_model=UserDetail)
 async def adiciona_usuario(data: UserAuth):

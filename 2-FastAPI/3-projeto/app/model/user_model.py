@@ -24,7 +24,7 @@ from typing import Optional
 class User(Document):
 
     # Campo obrigatório: identificador único gerado automaticamente com uuid4
-    user_id: UUID = Field(default_factory=uuid4)
+    user_id: Indexed(str, unique=True) = Field(default_factory=lambda: str(uuid4()))
 
     # Campo de nome de usuário do tipo string
     # Indexed cria um índice no banco para esse campo, e unique=True garante que não pode haver duplicados
@@ -61,7 +61,7 @@ class User(Document):
         return False
 
     @property
-    def crearte(self) -> datetime:
+    def create(self) -> datetime:
         return self.id.generation_time
 
     @classmethod

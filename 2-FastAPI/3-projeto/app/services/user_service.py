@@ -1,8 +1,7 @@
 from app.model.user_model import User
-from app.schemas.user_cad import UserAuth
+from app.schemas.users.user_cad import UserAuth
 from app.core.secutiry import get_password_hash, verify_password
 from typing import Optional
-from uuid import UUID
 
 class UserService:
     @staticmethod
@@ -33,7 +32,8 @@ class UserService:
         return user
 
     @staticmethod
-    async def get_user_by_id(id: UUID) -> Optional[User]:
+    async def get_user_by_id(id: str) -> Optional[User]:
+        # Busca pelo user_id (string) que é o identificador customizado
         user = await User.find_one(User.user_id == id)
         return  user
 

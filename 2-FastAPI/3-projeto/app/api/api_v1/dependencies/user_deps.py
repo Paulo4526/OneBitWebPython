@@ -3,7 +3,7 @@ from fastapi import Depends, HTTPException, status
 from app.model.user_model import User
 from jose import jwt, JWTError
 from app.core.config import settings
-from app.schemas.auth_schema import TokenPayload
+from app.schemas.auth.auth_schema import TokenPayload
 from datetime import datetime
 from pydantic import ValidationError
 from app.services.user_service import UserService
@@ -18,7 +18,7 @@ async def get_current_user(token: str = Depends(oauth_reusable)) -> User:
         payload = jwt.decode(
             token,
             settings.JWT_SECRET_KEY,
-            settings.ALGORITHM
+            algorithms=[settings.ALGORITHM]
         )
         token_data= TokenPayload(**payload)
         if datetime.fromtimestamp(token_data.exp) < datetime.now():

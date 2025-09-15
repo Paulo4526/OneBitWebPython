@@ -17,6 +17,8 @@ from motor.motor_asyncio import AsyncIOMotorClient
 # Importa o modelo de documento User, que será armazenado no MongoDB via Beanie
 from app.model.user_model import User
 
+from app.model.task_model import Task
+
 from app.api.api_v1.router import router
 
 
@@ -32,7 +34,8 @@ async def lifespan(app: FastAPI):
             database=cliente_db,
             document_models=[
                 # Lista de modelos (documentos) a serem registrados no banco
-                User
+                User,
+                Task
             ]
         )
     except Exception as exc:
